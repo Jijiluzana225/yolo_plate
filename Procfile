@@ -1,0 +1,1 @@
+web: gunicorn yolodetect.wsgi --log-file -

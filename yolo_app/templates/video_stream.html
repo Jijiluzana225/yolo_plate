@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .result.success {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .result.error {
+            background-color: #fecaca;
+            color: #7f1d1d;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compare Images</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="live_image" required>
+            <button type="button" onclick="compareImage()">Upload and Compare</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function compareImage() {
+            const formData = new FormData(document.getElementById('uploadForm'));
+
+            fetch('/yolo/compare_images/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                if (data.status === 'Match Found') {
+                    resultDiv.innerHTML = `
+                        <p><strong>Plate Number:</strong> ${data.car_details.plate_number}</p>
+                        <p><strong>Car Owner:</strong> ${data.car_details.car_owner}</p>
+                        <p><strong>Address:</strong> ${data.car_details.address}</p>
+                        <p><strong>Classification:</strong> ${data.car_details.classification}</p>
+                        <p><strong>Remarks:</strong> ${data.car_details.remarks}</p>
+                    `;
+                    resultDiv.className = 'result success';
+                } else {
+                    resultDiv.textContent = 'No Match';
+                    resultDiv.className = 'result error';
+                }
+            })
+            .catch(error => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.textContent = 'Error comparing images.';
+                resultDiv.className = 'result error';
+            });
+        }
+    </script>
+</body>
+</html>
