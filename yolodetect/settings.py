@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'yolodetect.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'Viza0225!',
-        'HOST': 'localhost',  # Use 'localhost' if on the same machine or an IP address if remote
+        'PASSWORD': 'tjvzodnchnmUaeZPWaxcYodmRDqdUwjx!',
+        'HOST': 'junction.proxy.rlwy.net',  # Use 'localhost' if on the same machine or an IP address if remote
         'PORT': '5432',  # Default PostgreSQL port, change if needed
     }
 }
