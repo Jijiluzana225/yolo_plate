@@ -48,3 +48,18 @@ def video_feed(request):
 
     return StreamingHttpResponse(generate_frames(),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
+
+
+def landing(request):
+    return render(request, 'landing.html')  # Ensure your HTML file is named 'landing_page.html' and is in the templates folder.
+
+
+def contact(request):
+    if request.method == 'POST':
+        # Handle form submission (e.g., send an email, save to database)
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        # Add your logic here
+        return render(request, 'thank_you.html', {'name': name})
+    return render(request, 'contact.html')
