@@ -95,12 +95,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'tjvzodnchnmUaeZPWaxcYodmRDqdUwjx!',
+        'PASSWORD': 'tjvzodnchnmUaeZPWaxcYodmRDqdUwjx',
         'HOST': 'junction.proxy.rlwy.net',  # Use 'localhost' if on the same machine or an IP address if remote
-        'PORT': '5432',  # Default PostgreSQL port, change if needed
+        'PORT': '41159',  # Default PostgreSQL port, change if needed
     }
-}
 
+    
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -140,9 +141,12 @@ import os
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Additional directories to include static files (for local development)
+
+STATIC_URL = '/static/'  # URL to access static files
+
+# Optionally, define a directory for static files collected from all apps
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / 'static',  # Adjust based on your project's structure
 ]
 
 # Default primary key field type
