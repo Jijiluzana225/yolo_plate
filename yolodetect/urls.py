@@ -1,22 +1,8 @@
-# from django.contrib import admin
-# from django.urls import path, include
-
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('yolo/', include('yolo_app.urls')),  # Include the yolo_app URLs
-# ]
-
-
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('detection.urls')),
+    path('video_feed/', views.video_feed, name='video_feed'),
+    path('', views.landing, name='landing'),
+    path('contact/', views.contact, name='contact'),    # Contact form URL
 ]
-
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
